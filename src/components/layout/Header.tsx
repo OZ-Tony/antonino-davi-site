@@ -17,10 +17,15 @@ const Header = () => {
       // Get the current active section
       const sections = document.querySelectorAll('section[id]')
       sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100
-        const sectionHeight = section.offsetHeight
+        // Cast Element to HTMLElement to access offsetTop and offsetHeight
+        const htmlElement = section as HTMLElement
+        const sectionTop = htmlElement.offsetTop - 100
+        const sectionHeight = htmlElement.offsetHeight
         if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-          setActiveSection(section.getAttribute('id') || '')
+          const sectionId = section.getAttribute('id')
+          if (sectionId) {
+            setActiveSection(sectionId)
+          }
         }
       })
     }
